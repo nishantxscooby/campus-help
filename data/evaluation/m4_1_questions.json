@@ -1,0 +1,362 @@
+[
+  {
+    "question_id": "M41-Q001",
+    "question": "Do the discipline rules apply if a student commits misconduct outside the university campus?",
+    "category": "conduct_responsibilities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["de043ef96a8ae1f6"],
+    "notes": "Verified on page 2: breaches inside or outside campus fall under the rules."
+  },
+  {
+    "question_id": "M41-Q002",
+    "question": "Can students hold a peaceful sit-in or dharna without being punished under these rules?",
+    "category": "conduct_responsibilities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["de043ef96a8ae1f6"],
+    "notes": "Verified on page 2: a designated peaceful sit-in with prior intimation does not invite punishment."
+  },
+  {
+    "question_id": "M41-Q003",
+    "question": "What general behaviour does the student code of conduct expect?",
+    "category": "conduct_responsibilities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["de043ef96a8ae1f6", "407ea400e4a6bc87"],
+    "notes": "Verified on page 2: good conduct, orderly behaviour, healthy traditions, and attention to academic work."
+  },
+  {
+    "question_id": "M41-Q004",
+    "question": "Who has authority over student discipline and disciplinary action at Bennett University?",
+    "category": "conduct_responsibilities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["f6901e6afc25a826"],
+    "notes": "Verified on page 2: the Vice Chancellor is vested with the relevant powers."
+  },
+  {
+    "question_id": "M41-Q005",
+    "question": "Do these discipline rules cover part-time students and students admitted before the rules were notified?",
+    "category": "conduct_responsibilities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["de043ef96a8ae1f6"],
+    "notes": "Verified on page 2: the rules apply to all students, including part-time students, before or after commencement."
+  },
+  {
+    "question_id": "M41-Q006",
+    "question": "What kinds of behaviour are listed as Category I disciplinary misconduct?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["067e151abf58a54b", "cd21ed39ea433e92", "b9d4a0253e0c7079"],
+    "notes": "Verified on page 6: violence, coercion, privacy disturbance, and sexual-harassment examples."
+  },
+  {
+    "question_id": "M41-Q007",
+    "question": "Is cyberbullying treated as a disciplinary violation?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["ff10accb8ee6929c"],
+    "notes": "Verified on page 7: bullying in any form, including cyberbullying, is listed."
+  },
+  {
+    "question_id": "M41-Q008",
+    "question": "What does the document say about possessing or distributing drugs or psychotropic substances?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["ff10accb8ee6929c", "d75de57ebb19414a"],
+    "notes": "Verified on pages 7 and 20: the conduct is prohibited and the statutory-offence table specifies expulsion and police intimation."
+  },
+  {
+    "question_id": "M41-Q009",
+    "question": "Is gambling or betting prohibited on university premises?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["d8fdccb230b145e7", "52ddcdbb080cd9fa", "de27a8ec20c10687"],
+    "notes": "Verified on pages 7 and 22: gambling/betting is listed, including using university infrastructure to support it."
+  },
+  {
+    "question_id": "M41-Q010",
+    "question": "Can a student accommodate an unauthorized guest in a hall of residence?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["611b52029bcb3803"],
+    "notes": "Verified on page 7: accommodating unauthorized guests or other persons in halls is listed."
+  },
+  {
+    "question_id": "M41-Q011",
+    "question": "Is cooking with a hot plate or electric cooker in a hostel room allowed?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["d8fdccb230b145e7", "1bd03e260f92b3d0"],
+    "notes": "Verified on pages 7 and 9: cooking in hostel rooms and the associated equipment rule are covered."
+  },
+  {
+    "question_id": "M41-Q012",
+    "question": "What can happen if a student leaves campus without permission or a gate pass?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["7669e7dae47cf2b3", "b6786e460d8f24f9", "4b1d6525b819fe8d"],
+    "notes": "Verified on pages 8 and 14: unauthorized departure is prohibited and penalties include warnings, fines, blocked gate passes, and possible expulsion from hostel."
+  },
+  {
+    "question_id": "M41-Q013",
+    "question": "What happens if a student refuses a bag or luggage inspection?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["3a0f8860a52bc4a2", "55e8087c88228ea2", "535c148766e9b21a"],
+    "notes": "Verified on pages 8 and 11: refusal or resistance to checking is listed with a penalty table."
+  },
+  {
+    "question_id": "M41-Q014",
+    "question": "Is lending a university identity card or access code to someone else a violation?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["4cc62505faa68f61", "4fdfafc18b3d0fed"],
+    "notes": "Verified on page 23: lending identity cards, codes, or university-app access is addressed."
+  },
+  {
+    "question_id": "M41-Q015",
+    "question": "What kinds of discrimination are prohibited by the rules?",
+    "category": "prohibited_activities",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["ff10accb8ee6929c", "a31ed4f0b92139ff"],
+    "notes": "Verified on pages 7 and 22: discrimination based on listed personal characteristics is prohibited."
+  },
+  {
+    "question_id": "M41-Q016",
+    "question": "What happens after the university receives a misconduct complaint?",
+    "category": "investigation_procedure",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["8995f95b4d376550"],
+    "notes": "Verified on page 3: the complaint is scrutinized for Proctorial Committee jurisdiction."
+  },
+  {
+    "question_id": "M41-Q017",
+    "question": "Whose statements and evidence are considered during a disciplinary enquiry?",
+    "category": "investigation_procedure",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["8995f95b4d376550", "0cdb342f55dd0425"],
+    "notes": "Verified on page 3: complainant, accused, witnesses, staff evidence, and material evidence are described."
+  },
+  {
+    "question_id": "M41-Q018",
+    "question": "How does the committee handle audio, video, or paper evidence?",
+    "category": "investigation_procedure",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["0cdb342f55dd0425"],
+    "notes": "Verified on page 3: material evidence is examined and its veracity is established with the submitter."
+  },
+  {
+    "question_id": "M41-Q019",
+    "question": "Why is a show-cause notice issued in the enquiry process?",
+    "category": "investigation_procedure",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["0cdb342f55dd0425"],
+    "notes": "Verified on page 3: charges are framed, a show-cause notice is issued, and the defence is examined."
+  },
+  {
+    "question_id": "M41-Q020",
+    "question": "What can the Proctorial Committee do if the accused student does not appear?",
+    "category": "investigation_procedure",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["047e458c9fdc7f71"],
+    "notes": "Verified on page 5: the committee may draw a conclusion ex parte and submit the documents."
+  },
+  {
+    "question_id": "M41-Q021",
+    "question": "What deadlines are stated for convening a Proctorial Committee and submitting recommendations?",
+    "category": "investigation_procedure",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["df3dfc8b2bc5d039", "e1d1f1cadd1a923a"],
+    "notes": "Verified on page 4: notice within 3 days, school meeting within 5 days, and recommendations within the next 7 days."
+  },
+  {
+    "question_id": "M41-Q022",
+    "question": "How does the Deputy Proctor decide whether a case is dismissed or escalated?",
+    "category": "committees_and_powers",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["94dc298b1e4ee1aa", "1c5dc37875e96455"],
+    "notes": "Verified on pages 3 and 4: after preliminary enquiry and assessing seriousness, a case may receive a minor penalty or escalate."
+  },
+  {
+    "question_id": "M41-Q023",
+    "question": "When will a serious or off-campus incident generally be handled by the University Proctorial Committee?",
+    "category": "committees_and_powers",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["1c5dc37875e96455"],
+    "notes": "Verified on page 4: major or serious incidents, including off-campus matters or external witnesses, generally go to the University Committee."
+  },
+  {
+    "question_id": "M41-Q024",
+    "question": "Can the person who first investigated a case sit on the committee deciding it?",
+    "category": "committees_and_powers",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["1c5dc37875e96455", "df3dfc8b2bc5d039"],
+    "notes": "Verified on page 4: the initial investigator should not be a committee member, subject to the stated complaint-member exception."
+  },
+  {
+    "question_id": "M41-Q025",
+    "question": "Who keeps the Proctorial Committee proceedings and documents confidential?",
+    "category": "committees_and_powers",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["df3dfc8b2bc5d039"],
+    "notes": "Verified on page 4: the Deputy Proctor keeps the proceedings and documents as confidential documents."
+  },
+  {
+    "question_id": "M41-Q026",
+    "question": "What punishments are listed for Category I misconduct?",
+    "category": "punishments_penalties",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["0320a43289fbdbe8"],
+    "notes": "Verified on page 8: cancellation or withdrawal, rustication, out-of-bounds orders, and expulsion."
+  },
+  {
+    "question_id": "M41-Q027",
+    "question": "What punishments are listed for Category II misconduct?",
+    "category": "punishments_penalties",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["8fce4c0b6a83c0fd", "895bb5ab0b064e1c"],
+    "notes": "Verified on pages 8 and 9: reprimand, fines, recovery, withdrawal of facilities, stoppage of academic processes, out-of-bounds orders, and rustication."
+  },
+  {
+    "question_id": "M41-Q028",
+    "question": "What penalties can apply when university property is damaged or stolen?",
+    "category": "punishments_penalties",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["8fce4c0b6a83c0fd", "c69573124c7ca1be", "1096dc30c910dca8"],
+    "notes": "Verified on pages 8 and 11: recovery/fines, warnings, suspension, withholding privileges, or expulsion are described."
+  },
+  {
+    "question_id": "M41-Q029",
+    "question": "What sanctions are described for alcohol possession or being intoxicated on campus?",
+    "category": "punishments_penalties",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["4d05133a12ccb25e", "fbf867d031fbe036", "759eccd49a9822da"],
+    "notes": "Verified on pages 10 and 11: the prohibited conduct and escalating warning, fine, suspension, withholding, and expulsion outcomes are covered."
+  },
+  {
+    "question_id": "M41-Q030",
+    "question": "What penalties may follow physical violence or causing bodily injury?",
+    "category": "punishments_penalties",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["9ee67371159ace93", "0396efee68c45a18", "66f41fbf883ec7a2"],
+    "notes": "Verified on pages 15 and 21: warnings/counselling, suspension, withholding privileges, and expulsion are listed."
+  },
+  {
+    "question_id": "M41-Q031",
+    "question": "How soon and to whom must a student submit an appeal against a penalty?",
+    "category": "appeals_review",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["74b85be0218069f0"],
+    "notes": "Verified on page 5: the appeal is written to the Vice-Chancellor within 5 working days of service of the order."
+  },
+  {
+    "question_id": "M41-Q032",
+    "question": "Who reviews major and minor penalties, and what can the Vice-Chancellor decide?",
+    "category": "appeals_review",
+    "answerable": true,
+    "source_document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+    "relevant_chunk_ids": ["74b85be0218069f0"],
+    "notes": "Verified on page 5: review authority differs for major and minor penalties; the Vice-Chancellor may maintain, moderate, escalate, or refer back in exceptional cases."
+  },
+  {
+    "question_id": "M41-Q033",
+    "question": "What is the tuition fee deadline for this semester?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "The ingested discipline document contains no tuition-fee calendar or deadline. The scholarship PDF is not processed or embedded."
+  },
+  {
+    "question_id": "M41-Q034",
+    "question": "What attendance percentage must a student maintain to sit for examinations?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "No attendance requirement or examination eligibility rule is present in the ingested discipline document."
+  },
+  {
+    "question_id": "M41-Q035",
+    "question": "How do I apply for a Bennett University scholarship?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "A scholarship PDF exists under data/input but has not been ingested, so it cannot support an answer in this evaluation."
+  },
+  {
+    "question_id": "M41-Q036",
+    "question": "Where can I find the examination timetable for my programme?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "The current processed corpus contains no examination timetable or programme calendar."
+  },
+  {
+    "question_id": "M41-Q037",
+    "question": "How do I apply for a hostel room for next semester?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "The discipline document mentions hostel violations and penalties, not room-allocation procedures."
+  },
+  {
+    "question_id": "M41-Q038",
+    "question": "What is the library fine for returning a book late?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "The discipline document mentions unauthorized possession or damage of library material but gives no overdue-book fine."
+  },
+  {
+    "question_id": "M41-Q039",
+    "question": "How do I register for courses or change my class section?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "No course-registration or section-change procedure is present in the ingested corpus."
+  },
+  {
+    "question_id": "M41-Q040",
+    "question": "How much does a meal at the university dining hall cost?",
+    "category": "unsupported",
+    "answerable": false,
+    "source_document": null,
+    "relevant_chunk_ids": [],
+    "notes": "The document references dining-hall access codes but contains no meal prices."
+  }
+]

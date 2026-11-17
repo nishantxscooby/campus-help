@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Editor and OS
+.DS_Store
+.vscode/
+.idea/
+
+# Model and generated artifacts
+*.npz
+
+# Keep source PDFs and processed JSON unless deliberately excluded
+
+
+# Python build metadata
+*.egg-info/
+**/*.egg-info/

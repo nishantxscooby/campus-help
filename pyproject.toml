@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "campus-help"
+version = "0.1.0"
+description = "Local PDF ingestion pipeline for Campus Help"
+requires-python = ">=3.10"
+dependencies = [
+    "PyMuPDF>=1.23",
+    "rank-bm25>=0.2.2",
+    "numpy>=1.24",
+    "sentence-transformers>=3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+campus-help-ingest = "campus_help.ingestion.cli:main"
+campus-help-search = "campus_help.retrieval.cli:main"
+campus-help-semantic-search = "campus_help.semantic.cli:main"
+campus-help-hybrid-search = "campus_help.hybrid.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["campus_help*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
