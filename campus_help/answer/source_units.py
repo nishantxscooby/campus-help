@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
 from dataclasses import replace
 
 from ..hybrid.engine import HybridSearchResult
@@ -12,11 +12,36 @@ from .models import ExtractionMethod, SourceSpan, SourceUnit, UnitType
 _NUMBERED_ITEM_RE = re.compile(
     r"(?m)(?<!\S)(\d+(?:\.\d+)*[.)])(?:[ \t]+)"
 )
+_LINE_BREAK_RE = re.compile(r"\r?\n(?:[ \t]*\r?\n)*")
+_MODAL = r"(?:must|shall|will|may)"
+_OPEN_END_RE = re.compile(rf"\b(?:{_MODAL}(?: be| have)?|the|their|any|by|of|to)$")
+_PROSE_VERB_RE = re.compile(rf"\b(?:{_MODAL}|is|are|has|have)\b")
+_BARE_MARKER_RE = re.compile(r"(?:[a-z]|[ivxlcdm]+|\d+)[.)]", re.I)
+_DURATION_RE = re.compile(r"^\d+[ \t]+(?:working[ \t]+)?(?:days?|hours?|weeks?|months?)\b")
+_POLICY_NOUN_PHRASE = (
+    r"(?:(?:[0-9]+|a|an|the) )?(?:(?:written|signed|working) )?"
+    r"(?:appeals?|applications?|requests?|forms?|signatures?|students?|"
+    r"committees?|registrars?|hours?|days?|weeks?)"
+)
+_POLICY_PREDICATE = (
+    rf"(?:(?:is|are|{_MODAL} be) (?:required|filed|submitted|permitted|prohibited)"
+    rf"|{_MODAL} (?:attend|meet|elapse))"
+)
+_STANDALONE_POLICY_RE = re.compile(
+    rf"{_POLICY_NOUN_PHRASE} {_POLICY_PREDICATE}"
+    rf"(?: (?:for|with|to|by) {_POLICY_NOUN_PHRASE}"
+    rf"| (?:before|after) {_POLICY_NOUN_PHRASE} {_POLICY_PREDICATE})?\.",
+    re.ASCII | re.IGNORECASE,
+)
+
+
+def _is_explicit_row(text: str) -> bool:
+    return text.startswith(("•", "-")) or "|" in text
 
 
 def _is_table_fragment(text: str, section: str) -> bool:
     candidate = text.strip()
-    if candidate.startswith(("•", "-", "|")):
+    if _is_explicit_row(candidate):
         return True
     if re.match(r"^(?:Sr\.?\s*No\.?|Penalties?|Acts of Indiscipline)\b", candidate, re.I):
         return True
@@ -52,6 +77,61 @@ def _trimmed_span(
 
 def _ends_with_terminal_punctuation(text: str) -> bool:
     return text.rstrip().endswith((".", "!", "?", ")"))
+
+
+def _continues_prose(head: str, following: str, section: str) -> bool:
+    """Recognize an open grammatical link, never a paragraph break by default."""
+    marker = _NUMBERED_ITEM_RE.match(head)
+    body = head[marker.end():] if marker else head
+    if not body or not body[0].isupper() or not following:
+        return False
+    if not marker and not _PROSE_VERB_RE.search(body):
+        return False
+    if any(
+        _is_table_fragment(part, section) or "\t" in part
+        for part in (body, following)
+    ):
+        return False
+    if re.search(r"[.!?:;]", body) or _NUMBERED_ITEM_RE.search(following):
+        return False
+    if re.search(r"[.!?].", following):
+        return False
+    if re.search(r"\bwithin$", body) and _DURATION_RE.match(following):
+        return True
+    return bool(
+        _OPEN_END_RE.search(body)
+        and not _BARE_MARKER_RE.fullmatch(following)
+        and re.match(r"[a-z][\w’'/-]*(?:,?\s+\w|[.!?]$)", following)
+    )
+
+
+def _chunk_units(chunk: HybridSearchResult) -> Iterator[SourceUnit]:
+    text = chunk.text
+    start = line_start = 0
+    separators = iter(_LINE_BREAK_RE.finditer(text))
+    current = next(separators, None)
+    while current is not None:
+        following = next(separators, None)
+        next_end = following.start() if following else len(text)
+        line = text[line_start:current.start()].strip()
+        next_line = text[current.end():next_end].strip()
+        breaks = current.group().count("\n")
+        if breaks == 1:
+            split = (
+                _is_explicit_row(line) or _is_explicit_row(next_line)
+                or _is_heading(line) or _is_heading(next_line)
+                or _NUMBERED_ITEM_RE.match(next_line) is not None
+            )
+        else:
+            split = breaks > 2 or not _continues_prose(
+                text[start:current.start()].strip(), next_line, chunk.section,
+            )
+        if split:
+            yield from _extract_block(chunk, start, current.start())
+            start = current.end()
+        line_start = current.end()
+        current = following
+    yield from _extract_block(chunk, start, len(text))
 
 
 def _make_unit(
@@ -106,15 +186,25 @@ def _split_sentences(
     units: list[SourceUnit] = []
     for start, end in sentence_bounds:
         unit_text = text[start:end]
-        terminal = _ends_with_terminal_punctuation(unit_text)
+        if unit_text[0].islower() or unit_text[0].isdigit():
+            tail = (
+                _STANDALONE_POLICY_RE.fullmatch(unit_text) is None
+                or (start, end) != _trimmed_span(text, 0, len(text))
+            )
+        else:
+            tail = (
+                _BARE_MARKER_RE.fullmatch(unit_text) is not None
+                or not any(character.isalpha() for character in unit_text)
+            )
         units.append(
             _make_unit(
                 chunk,
                 unit_text,
                 SourceSpan(start, end),
-                UnitType.SENTENCE,
-                terminal,
-                ExtractionMethod.SENTENCE_SPLIT,
+                UnitType.CONTINUATION if tail else UnitType.SENTENCE,
+                not tail and _ends_with_terminal_punctuation(unit_text),
+                ExtractionMethod.CONTINUATION_DETECTION
+                if tail else ExtractionMethod.SENTENCE_SPLIT,
             )
         )
     return tuple(units)
@@ -132,7 +222,8 @@ def _extract_block(
 
     block = text[start:end]
 
-    if _is_heading(block):
+    explicit_row = _is_explicit_row(block)
+    if not explicit_row and _is_heading(block):
         return (
             _make_unit(
                 chunk,
@@ -144,22 +235,16 @@ def _extract_block(
             ),
         )
 
-    numbered = tuple(
-        unit
-        for unit in _split_numbered_items_in_range(chunk, start, end)
-    )
-    if numbered:
-        return numbered
+    if not explicit_row:
+        numbered = _split_numbered_items_in_range(chunk, start, end)
+        if numbered:
+            return numbered
 
-    if _is_table_fragment(block, chunk.section):
+    if explicit_row or _is_table_fragment(block, chunk.section):
         return (
             _make_unit(
-                chunk,
-                block,
-                SourceSpan(start, end),
-                UnitType.TABLE_ROW,
-                False,
-                ExtractionMethod.TABLE_ROW_DETECTION,
+                chunk, block, SourceSpan(start, end), UnitType.TABLE_ROW,
+                False, ExtractionMethod.TABLE_ROW_DETECTION,
             ),
         )
 
@@ -249,47 +334,31 @@ def extract_source_units(
     chunks: Sequence[HybridSearchResult],
 ) -> tuple[SourceUnit, ...]:
     """Extract exact, deterministic source units from one-chunk-at-a-time spans."""
-    units: list[SourceUnit] = []
-
-    for chunk in chunks:
-        if not chunk.text.strip():
-            continue
-
-        paragraph_matches = list(
-            re.finditer(r"\n\s*\n+", chunk.text)
-        )
-        if not paragraph_matches:
-            units.extend(_extract_block(chunk, 0, len(chunk.text)))
-            continue
-
-        block_start = 0
-        for separator in paragraph_matches:
-            if block_start < separator.start():
-                units.extend(_extract_block(chunk, block_start, separator.start()))
-            block_start = separator.end()
-        if block_start < len(chunk.text):
-            units.extend(_extract_block(chunk, block_start, len(chunk.text)))
-
     finalized: list[SourceUnit] = []
-    for unit in units:
-        if finalized:
-            previous = finalized[-1]
-            continues_incomplete_numbered_item = (
-                previous.chunk_id == unit.chunk_id
-                and previous.unit_type is UnitType.NUMBERED_ITEM
+    for chunk in chunks:
+        previous = None
+        for unit in _chunk_units(chunk):
+            if (
+                previous is not None
                 and not previous.is_complete
+                and (
+                    previous.unit_type is UnitType.NUMBERED_ITEM
+                    or previous.text.endswith("/")
+                    or re.search(r"\bincluding$", previous.text)
+                )
                 and unit.unit_type not in (
                     UnitType.NUMBERED_ITEM,
                     UnitType.HEADING,
+                    UnitType.TABLE_ROW,
                 )
-            )
-            if continues_incomplete_numbered_item:
+            ):
                 unit = replace(
                     unit,
                     unit_type=UnitType.CONTINUATION,
                     is_complete=False,
                     extraction_method=ExtractionMethod.CONTINUATION_DETECTION,
                 )
-        finalized.append(unit)
+            finalized.append(unit)
+            previous = unit
 
     return tuple(finalized)
