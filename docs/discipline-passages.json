@@ -1,0 +1,217 @@
+{
+  "format": "reviewed-passages-v1",
+  "document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+  "corpus_sha256": "5108a91f99e3d49c0f4d5b7d5a8ad5761f58b5fb9ee92357013c01d892c6b5e1",
+  "pdf_sha256": "1325facb0517e640ebf634e8d30ffe3d2fcd1122a676e7cfba49db9a8fa3bb2d",
+  "review_revision": "discipline-draft-1",
+  "entries": [
+    {
+      "fact_id": "appeal",
+      "relation": "deadline",
+      "questions": [
+        "What is the deadline to file an appeal?",
+        "How many working days do I have to appeal?",
+        "Appeal deadline",
+        "Last date to appeal",
+        "How long do I have to appeal?"
+      ],
+      "claim": "Five working days from service of the order for the written appeal described in clause i.",
+      "context": "Written disciplinary appeal by the student awarded the penalty to the Vice-Chancellor. Time runs from service of the order.",
+      "exceptions": "Pending independent review of governing provisions and exceptions.",
+      "witnesses": [
+        {
+          "page": 5,
+          "chunk_id": "74b85be0218069f0",
+          "start": 330,
+          "end": 340,
+          "quotation": "6. Appeal:",
+          "parent_sha256": "d5c6274c423c2aa61b3437d9808a47893704967180a81c6b5b92b7a9b0c5a6e2"
+        },
+        {
+          "page": 5,
+          "chunk_id": "74b85be0218069f0",
+          "start": 346,
+          "end": 585,
+          "quotation": "A student having been awarded a penalty for any act(s) of indiscipline or misconduct shall have\n\nthe right to file an appeal (in writing) for review of the decision to the Vice-Chancellor within\n\n5 working days of the service of the order.",
+          "parent_sha256": "d5c6274c423c2aa61b3437d9808a47893704967180a81c6b5b92b7a9b0c5a6e2"
+        }
+      ],
+      "passage_sha256": "1b8ca8ca337ea2cb187c52841fe6ec7a1210d3501ef5ed54517963a1b243b794",
+      "status": "PENDING_REVIEW",
+      "reviewer": null,
+      "decision_date": null
+    },
+    {
+      "fact_id": "major",
+      "relation": "review_authority",
+      "questions": [
+        "Who reviews major disciplinary penalties?",
+        "Who can review major penalties?"
+      ],
+      "claim": "Review authority for major penalties under clause ii.",
+      "context": "Appeal clause ii. Distinguish review from imposition.",
+      "exceptions": "Pending independent review of governing provisions and exceptions.",
+      "witnesses": [
+        {
+          "page": 5,
+          "chunk_id": "74b85be0218069f0",
+          "start": 330,
+          "end": 340,
+          "quotation": "6. Appeal:",
+          "parent_sha256": "d5c6274c423c2aa61b3437d9808a47893704967180a81c6b5b92b7a9b0c5a6e2"
+        },
+        {
+          "page": 5,
+          "chunk_id": "74b85be0218069f0",
+          "start": 592,
+          "end": 676,
+          "quotation": "The powers to review the major penalties imposed shall lie with the Vice-Chancellor.",
+          "parent_sha256": "d5c6274c423c2aa61b3437d9808a47893704967180a81c6b5b92b7a9b0c5a6e2"
+        }
+      ],
+      "passage_sha256": "98965fafb56a567e4184eab9e1f2eb651cb4e2b2e7fe1615980d2ef01c94c992",
+      "status": "PENDING_REVIEW",
+      "reviewer": null,
+      "decision_date": null
+    },
+    {
+      "fact_id": "minor",
+      "relation": "review_authority",
+      "questions": [
+        "Who reviews minor disciplinary penalties?",
+        "Who can review minor penalties?"
+      ],
+      "claim": "Review authority for minor penalties under clause ii.",
+      "context": "Appeal clause ii. Distinguish review from imposition.",
+      "exceptions": "Pending independent review of governing provisions and exceptions.",
+      "witnesses": [
+        {
+          "page": 5,
+          "chunk_id": "74b85be0218069f0",
+          "start": 330,
+          "end": 340,
+          "quotation": "6. Appeal:",
+          "parent_sha256": "d5c6274c423c2aa61b3437d9808a47893704967180a81c6b5b92b7a9b0c5a6e2"
+        },
+        {
+          "page": 5,
+          "chunk_id": "74b85be0218069f0",
+          "start": 677,
+          "end": 787,
+          "quotation": "Powers\n\nto review the minor penalties shall be with Chief Proctor / School Dean on one level above\n\nprinciple.",
+          "parent_sha256": "d5c6274c423c2aa61b3437d9808a47893704967180a81c6b5b92b7a9b0c5a6e2"
+        }
+      ],
+      "passage_sha256": "54d244b38df4b5730b9445686d5ec6a895982791d6f31ce27d39c17f8b91d22e",
+      "status": "PENDING_REVIEW",
+      "reviewer": null,
+      "decision_date": null
+    },
+    {
+      "fact_id": "rustication",
+      "relation": "penalty_category",
+      "questions": [
+        "Can I be rusticated?",
+        "Is rustication a possible disciplinary punishment?"
+      ],
+      "claim": "Rustication is listed as a possible punishment under Category I.",
+      "context": "Category I list. This question concerns possibility only. Category II separately lists rustication on page 9. No individual offence mapping.",
+      "exceptions": "Pending independent review of governing provisions and exceptions.",
+      "witnesses": [
+        {
+          "page": 8,
+          "chunk_id": "edf7b7286aaebfc1",
+          "start": 0,
+          "end": 216,
+          "quotation": "The competent authority may impose any of the following punishments on any student found\n\nguilty of any of the acts of indiscipline or misconduct mentioned in Category I or Category II,\n\nas the case may be in Rule 3.",
+          "parent_sha256": "9c2e771fd6cf741dbb68e10f2e6a8f3cae9e25aebae7061e3c766f160c809040"
+        },
+        {
+          "page": 8,
+          "chunk_id": null,
+          "start": 1334,
+          "end": 1345,
+          "quotation": "CATEGORY­ I",
+          "parent_sha256": "ebf3d32a4e2f484092a496a966f7fde3cb65aa9ff7a8413dfdb5b851100697be"
+        },
+        {
+          "page": 8,
+          "chunk_id": "0320a43289fbdbe8",
+          "start": 105,
+          "end": 220,
+          "quotation": "2. Rustication up to 2-4 semesters period and/or declaring any part or the entire University\n\nCampus out of bounds.",
+          "parent_sha256": "ff5f9d50ca9e71e621de3ccd3c9d16d8eac0ec1bc84315d95768d13e71025e44"
+        }
+      ],
+      "passage_sha256": "b50d6f6a6cdc19477fbb757b49b52569d5451c34fbc4f041a3c88fb9e9f37fda",
+      "status": "PENDING_REVIEW",
+      "reviewer": null,
+      "decision_date": null
+    },
+    {
+      "fact_id": "debar",
+      "relation": "committee_eligibility",
+      "questions": [
+        "Does making a complaint to a committee member debar that member from sitting?"
+      ],
+      "claim": "A complaint to a member does not itself debar that member from sitting.",
+      "context": "Only addresses committee membership following a complaint. Not a student debarment rule.",
+      "exceptions": "Pending independent review of governing provisions and exceptions.",
+      "witnesses": [
+        {
+          "page": 4,
+          "chunk_id": "df3dfc8b2bc5d039",
+          "start": 41,
+          "end": 225,
+          "quotation": "(However, a student making a complaint to a\n\nmember of the Proctorial Committee / Internal Complaints Committee (ICC) / ARC, etc. will\n\nnot debar such member from sitting as a member.)",
+          "parent_sha256": "b89e0d2190dcf5e80ee2c81e8de72871cf4ac8ff55473ffec8ae2a62a073dbb6"
+        }
+      ],
+      "passage_sha256": "a8fed55014b39bb15eae17b358a5ac341e0ee52dfebdc86f1dcf6ded3a884a24",
+      "status": "PENDING_REVIEW",
+      "reviewer": null,
+      "decision_date": null
+    },
+    {
+      "fact_id": "gambling",
+      "relation": "listed_conduct",
+      "questions": [
+        "Is gambling on University premises listed as misconduct?",
+        "Can I gamble on university premises?"
+      ],
+      "claim": "The list includes gambling on University premises.",
+      "context": "Section 7 Category II item 9. The list does not establish a specific penalty.",
+      "exceptions": "Pending independent review of governing provisions and exceptions.",
+      "witnesses": [
+        {
+          "page": 6,
+          "chunk_id": null,
+          "start": 13,
+          "end": 57,
+          "quotation": "7. CATEGORIES OF MISCONDUCT AND INDISCIPLINE",
+          "parent_sha256": "0f2dd11babc6788a66e87fbf511a012c8bb03088f37146359316941327543a91"
+        },
+        {
+          "page": 6,
+          "chunk_id": null,
+          "start": 813,
+          "end": 824,
+          "quotation": "CATEGORY­II",
+          "parent_sha256": "0f2dd11babc6788a66e87fbf511a012c8bb03088f37146359316941327543a91"
+        },
+        {
+          "page": 6,
+          "chunk_id": "8b899f2ff08fe95d",
+          "start": 143,
+          "end": 203,
+          "quotation": "9. Indulging in acts of gambling in the University premises.",
+          "parent_sha256": "b46297fd277254d5fa71899feec002be06f88a9ce727e1bab30ea383c1fcef23"
+        }
+      ],
+      "passage_sha256": "6d4184e18c3db7d1c1fea9e43c205f4126672b6e48297a680e0510d61ee6d146",
+      "status": "PENDING_REVIEW",
+      "reviewer": null,
+      "decision_date": null
+    }
+  ]
+}

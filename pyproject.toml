@@ -11,12 +11,17 @@ dependencies = [
     "PyMuPDF>=1.23",
     "rank-bm25>=0.2.2",
     "numpy>=1.24",
+    "scipy>=1.10",
     "sentence-transformers>=3.0",
+    "fastapi>=0.115,<1",
+    "pydantic>=2.8,<3",
+    "uvicorn>=0.30,<1",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
+    "httpx>=0.27,<0.29",
 ]
 
 [project.scripts]

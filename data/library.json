@@ -1,0 +1,11 @@
+[
+  {
+    "pdf": "input/scholarship_policy_25-26.pdf",
+    "corpus": "output/scholarship-layout.json",
+    "title": "Scholarship Policy",
+    "version": "2025\u201326",
+    "pdf_sha256": "a7167e08cd510b0b86da7041ddb716b44ee98ba26077cdba7c075420f2d6d7ff",
+    "corpus_sha256": "ea39d4833bef7fface14416585e99a81747441ecdfc0e661c7a339104e09eda5",
+    "layout": true
+  }
+]

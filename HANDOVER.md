@@ -3,8 +3,7 @@
 ## Repository
 
 - GitHub: `https://github.com/nishantxscooby/campus-help.git`
-- Local workspace: `/Users/nishant/Campus Help`
-- Branch: `main`
+- Working branch: `feature/m6-4-factual-verification`
 
 ## Project purpose
 
@@ -17,15 +16,7 @@ The system is not generative and does not use paid APIs.
 
 ## Verified repository state
 
-At handover:
-
-- Complete suite: 228 tests passing
-- Python compilation: passing
-- M6.3F targeted regressions: included in the suite
-- Git remote: `origin`
-- Remote URL: `https://github.com/nishantxscooby/campus-help.git`
-- Remote tracking: `main`
-- The answer pipeline does not enable automatic `ANSWERED` decisions
+The M6.4A baseline passed 297 Python tests before the web MVP. The website uses the pinned discipline corpus with an empty production fact registry. The browser tests use live FastAPI servers. The positive API test uses a separate synthetic PDF and registry.
 
 ## Completed milestones
 
@@ -85,7 +76,7 @@ At handover:
 - Fail-closed sufficiency pipeline
 - Targeted M6.3F regressions
 
-No M6.3G or M6.4 implementation is included.
+M6.3G repaired source boundaries. M6.4A added canonical provenance checks and immutable review contracts. The web MVP adds a narrow authority-question check after authentication.
 
 ## Architecture
 
@@ -140,52 +131,11 @@ data/output/discipline-rules-embeddings.npz
 The NPZ is ignored by Git through `*.npz`. The discipline JSON and source PDFs
 are repository data.
 
-The scholarship PDF exists at `data/input/Scholarship-Policy-25-26_.pdf` but
-is not ingested or embedded.
+The 2025–26 Scholarship Policy is indexed from `data/input/scholarship_policy_25-26.pdf`. The pinned page transcript is `data/output/scholarship-layout.json`; its operator manifest is `data/library.json`. The replacement PDF retains the same eleven rendered pages as the earlier scan.
 
-## Setup
+## Running and verifying the MVP
 
-```bash
-cd "/Users/nishant/Campus Help"
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -e ".[dev]"
-```
-
-Verified interpreter:
-
-```text
-/Users/nishant/.pyenv/versions/3.12.6/bin/python
-```
-
-No environment-variable names or secret values are required by the current
-implementation.
-
-## Verification commands
-
-```bash
-/Users/nishant/.pyenv/versions/3.12.6/bin/python -m pytest
-/Users/nishant/.pyenv/versions/3.12.6/bin/python \
-  -m compileall -q campus_help tests
-```
-
-M4.1 evaluation:
-
-```bash
-/Users/nishant/.pyenv/versions/3.12.6/bin/python scripts/m4_1_evaluate.py
-```
-
-Controlled M4 experiments:
-
-```bash
-/Users/nishant/.pyenv/versions/3.12.6/bin/python \
-  scripts/m4_controlled_experiments.py \
-  --output docs/m4-controlled-experiments-results.json
-```
-
-Both evaluation scripts completed successfully. The controlled-results JSON
-was regenerated and may show JSON object key-order differences from set
-iteration.
+Follow the local website and test commands in [README.md](README.md). The web entry point is `campus_help.web.api:app`. Open questions search both indexed documents using local hybrid retrieval with a BM25 fallback. The authority service checks selected evidence against the pinned JSON and PDF. Source files that fail digest checks produce a service error. The CLI also supports semantic and hybrid retrieval.
 
 ## Git state and secrets
 
@@ -205,7 +155,7 @@ Do not commit credentials or `.env` files.
 
 ## Known limitations
 
-- OCR is not implemented.
+- Scholarship OCR regions are searchable. The page 4 index retains 18 programme rows, both headers, the enclosing vertical range of shared cells, and the admission continuation conditions. The B. Tech AI row has a separate numerical cell. Programme aliases and corrected CGPA values are resolved from bounded student turns. The UI labels row excerpts and numerical comparisons as unreviewed. The Academic Scholarship on page 5 has separate conditions.
 - The processed discipline PDF is the primary verified corpus.
 - M4.1 recall is not full-corpus recall.
 - Human relevance labels need independent approval.
@@ -214,16 +164,16 @@ Do not commit credentials or `.env` files.
 - M5.2 lexical scoring cannot understand negation or semantic entailment.
 - Unsupported questions can still retrieve candidate text.
 - M6.3 remains fail-closed and is not semantic sufficiency validation.
-- Automatic `ANSWERED` decisions remain disabled.
-- No FastAPI, React frontend, database, authentication, Docker, or CI exists.
-- Retrieval and PDF metadata are not cross-document validated against all
-  source PDFs.
+- The web service supports both the single authority template and reviewed question bindings with exact source spans.
 
-## Next work
+## Remaining before public use
 
-1. Complete independent M4.1 human label review.
-2. Resolve extraction-defect issues without silently correcting policy text.
-3. Add an approved M6.3G/M6.4 semantic sufficiency mechanism only later.
-4. Add FastAPI after answer-validation semantics are stable.
-5. Process additional official PDFs.
-6. Add frontend integration after API contracts are finalized.
+Obtain independent review of the source version, governing scope, exceptions and exact witnesses before provisioning university facts. Exercise approved questions and nearby counterexamples against that registry. A public release also needs an operating environment for the API and built assets. The local workflow uses loopback HTTP.
+
+## Review release handover
+
+The [review guide](docs/discipline-review.md) and [source manifest](docs/discipline-review.json) cover two authority passages and ten conduct list entries. None passes the whole-parent authority template. The operator can load a compatible reviewed release with the paired file and digest settings. Recheck all witnesses after corpus changes. Live browser fixtures exercise approval, refusal, invalid citations and stale sources independently of the university corpus.
+
+The focused release covers the written appeal deadline, major and minor review authority, Category I rustication, committee-member eligibility and gambling under Category II. All six are pending. The [review instructions](docs/discipline-review.md#enable-the-first-reviewed-appeal-answer) include activation and a negative control.
+
+Open questions now use the general library search described in the README. BM25 runs locally and reciprocal rank fusion uses a cached encoder when available. The six university passage records remain pending. Scholarship citations identify the original PDF page and offsets in the pinned OCR transcript. See the README to regenerate and validate the index. Real browser coverage includes sending a prior student question to resolve a follow-up and opening page-specific sources.

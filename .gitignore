@@ -18,6 +18,10 @@ venv/
 
 # Model and generated artifacts
 *.npz
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
 
 # Keep source PDFs and processed JSON unless deliberately excluded
 
