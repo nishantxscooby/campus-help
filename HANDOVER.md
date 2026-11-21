@@ -135,7 +135,7 @@ The 2025–26 Scholarship Policy is indexed from `data/input/scholarship_policy_
 
 ## Running and verifying the MVP
 
-Follow the local website and test commands in [README.md](README.md). The web entry point is `campus_help.web.api:app`. Open questions search both indexed documents using local hybrid retrieval with a BM25 fallback. The authority service checks selected evidence against the pinned JSON and PDF. Source files that fail digest checks produce a service error. The CLI also supports semantic and hybrid retrieval.
+Follow the local website and test commands in [README.md](README.md). The bundled worker loads source-checked search spans from `data/search-spans/`. Rebuild that release after changing the sources or extraction logic. The README includes the Render BM25 configuration. The web entry point is `campus_help.web.api:app`. Open questions search both indexed documents using local hybrid retrieval with a BM25 fallback. The authority service checks selected evidence against the pinned JSON and PDF. Source files that fail digest checks produce a service error. The CLI also supports semantic and hybrid retrieval.
 
 ## Git state and secrets
 

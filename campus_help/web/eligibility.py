@@ -6,7 +6,6 @@ import re
 from .composition import comparison
 from .row_evidence import text_of
 from .search import layout_rows, search
-from .service import pinned_bytes
 
 GRADE = re.compile(
     r"\b(?:(\d+(?:\.\d+)?)\s*(cgpa|sgpa)|(cgpa|sgpa)\s*(?:(?:is|of|actually|now)\s+)*(\d+(?:\.\d+)?))\b",
@@ -189,8 +188,7 @@ def row_response(question, history, books):
     if not candidates:
         return None
     for book in candidates:
-        pinned_bytes(book.source.pdf_path, book.source.document.pdf_sha256)
-        pinned_bytes(book.source.corpus_path, book.source.corpus_revision)
+        book.check_files()
     rows = [
         s
         for book in candidates
