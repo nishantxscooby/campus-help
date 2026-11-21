@@ -1,0 +1,69 @@
+[
+  {
+    "question": "Where is the parents' affidavit for a single girl child?",
+    "document": "Scholarship Policy",
+    "pages": [
+      11
+    ],
+    "terms": [
+      "affidavit",
+      "parents"
+    ]
+  },
+  {
+    "question": "Can cousins apply for the sibling scholarship?",
+    "document": "Scholarship Policy",
+    "pages": [
+      3
+    ],
+    "terms": [
+      "siblings",
+      "not cousins"
+    ]
+  },
+  {
+    "question": "Who certifies child or spouse details for the employee rebate?",
+    "document": "Scholarship Policy",
+    "pages": [
+      4
+    ],
+    "terms": [
+      "certifying",
+      "spouse"
+    ]
+  },
+  {
+    "question": "When I qualify for two scholarships can I receive both awards?",
+    "document": "Scholarship Policy",
+    "pages": [
+      1,
+      6
+    ],
+    "terms": [
+      "multiple scholarships",
+      "highest"
+    ]
+  },
+  {
+    "question": "Which council approves the scholarship award?",
+    "document": "Scholarship Policy",
+    "pages": [
+      1
+    ],
+    "terms": [
+      "approved",
+      "executive council"
+    ]
+  },
+  {
+    "question": "Is there a death certificate in the list of documents for defence families?",
+    "document": "Scholarship Policy",
+    "pages": [
+      3
+    ],
+    "terms": [
+      "death certificate",
+      "defence"
+    ]
+  }
+]
