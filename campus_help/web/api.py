@@ -120,7 +120,10 @@ def create_app(
     manifest = os.getenv("CAMPUS_HELP_LIBRARY")
     if manifest is None and corpus is None and (data_dir / "library.json").is_file():
         manifest = data_dir / "library.json"
-    collection = inventory(source, title, manifest)
+    span_manifest = Path(os.environ.get("CAMPUS_HELP_SPAN_MANIFEST", ROOT / "data/search-spans/manifest.json"))
+    require_indexes = "CAMPUS_HELP_SPAN_MANIFEST" in os.environ or (
+        corpus is None and "CAMPUS_HELP_LIBRARY" not in os.environ)
+    collection = inventory(source, title, manifest, span_manifest=span_manifest, require_indexes=require_indexes)
     books = tuple(book for book in collection if not book.unavailable)
     app = FastAPI(title="Campus Help", version="0.1.0")
     app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
@@ -128,7 +131,8 @@ def create_app(
 
     @lru_cache(maxsize=1)
     def desk() -> PolicyDesk:
-        return PolicyDesk(source, registry, semantic_index=os.getenv("CAMPUS_HELP_SEMANTIC_INDEX"))
+        semantic_index = None if os.getenv("CAMPUS_HELP_SEARCH_MODE")=="bm25" else os.getenv("CAMPUS_HELP_SEMANTIC_INDEX")
+        return PolicyDesk(source, registry, semantic_index=semantic_index)
 
     @app.exception_handler(SourceUnavailable)
     async def source_unavailable(request: Request, exc: SourceUnavailable):
@@ -152,8 +156,7 @@ def create_app(
         result = []
         for book in collection:
             if not book.unavailable:
-                pinned_bytes(book.source.pdf_path, book.source.document.pdf_sha256)
-                pinned_bytes(book.source.corpus_path, book.source.corpus_revision)
+                book.check_files()
             result.append(Document(title=book.title, document_name=book.source.document.document_name,
                                    status="unavailable" if book.unavailable else "indexed", pdf_url=book.url, version=book.version, pdf_sha256=book.source.document.pdf_sha256))
         return result

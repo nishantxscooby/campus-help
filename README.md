@@ -204,6 +204,28 @@ For open questions the API searches page passages from every configured PDF and 
 
 The browser sends at most four earlier student questions. Follow-ups re-run retrieval. Search expansions and spelling suggestions affect ranking only. Authenticated reading excerpts retain the `insufficient_evidence` answer status. Table cells are shown individually. Each excerpt can be opened at its source page. A released `source_statement` can enable an exact reviewed question with a claim identical to its full parent quotation. The reviewer's scope and conflict checks are still required.
 
+### Render and cold BM25 workers
+
+Set `CAMPUS_HELP_SEARCH_MODE=bm25` on a memory-constrained service. A single worker can serve the built React application and API:
+
+```bash
+python -m uvicorn campus_help.web.api:app --host 0.0.0.0 --port "$PORT" --workers 1
+```
+
+Include `data/search-spans/` alongside the existing PDFs, corpora, library manifest and review configuration. The bundled release contains compressed, source-checked spans for both documents. The worker builds the small BM25 term index in memory. Library searches check the PDF, corpus and span artifact hashes. Loading the spans also validates their exact offsets against the PDF text or pinned page transcript. The scholarship layout is checked against a PDF-derived table geometry digest. Review status and answer authorization still use the existing verification path.
+
+After changing a source edition, transcript or passage extractor, update the source pins and regenerate the span release **before starting the worker**:
+
+```bash
+python -m scripts.build_search_spans
+```
+
+The builder runs the full PDF layout extraction, re-derives scholarship table geometry, and checks citation slices. It publishes content-addressed artifacts before atomically replacing the manifest. This step has the memory cost of PDF table extraction. The shipped artifacts can be reused across worker restarts. The operator-controlled manifest, artifacts and source files must travel together.
+
+For a custom library, build with `python -m scripts.build_search_spans --data-dir data --library /path/to/library.json --output /path/to/search-spans`. Point `CAMPUS_HELP_LIBRARY` and `CAMPUS_HELP_SPAN_MANIFEST` at their respective JSON manifests. An explicit span manifest requires a matching prepared index for every searchable document. Custom development libraries without a prepared entry retain the live extraction path. Optional sources that fail validation are listed as unavailable.
+
+Run `python -m scripts.profile_bm25` with the dev dependencies to exercise a fresh in-process FastAPI worker on Linux or macOS. It reports application-import-to-health time, first-request latency, peak RSS in MiB and loaded numerical/model libraries. For a cold measurement, start a new Python process on each run.
+
 ### Add a document
 
 1. Obtain the publisher's PDF, establish its identity and edition independently, and keep the expected PDF SHA-256 in operator configuration. The bundled additional-document manifest is `data/library.json`.

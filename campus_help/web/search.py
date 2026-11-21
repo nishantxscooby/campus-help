@@ -18,8 +18,8 @@ from ..retrieval.tokenizer import tokenize
 from ..semantic.engine import SemanticRetriever
 from ..semantic.model import MODEL_NAME, load_model
 from .tables import cell_position, grid
-from ..ingestion.table_rows import extract_tables, tiered_rows
-from .row_evidence import descriptors, search_text
+from .row_evidence import descriptors, search_text, witnesses
+from .span_store import unpack
 from .library import Book
 from .service import SourceUnavailable, pinned_bytes
 
@@ -100,6 +100,7 @@ def row_slices(book, number, tables, scanned):
 
 
 def page_slices(book, page):
+    from ..ingestion.table_rows import extract_tables, tiered_rows
     tables = grid(page)
     raw = page.get_text()
     cursor = 0
@@ -176,6 +177,63 @@ def local_model():
         return None
 
 
+def extract_spans(book):
+    """Build-time path for a release, also used for unprepared custom documents."""
+    pdf = pinned_bytes(book.source.pdf_path, book.source.document.pdf_sha256)
+    if book.layout:
+        return tuple(transcript_slices(book))
+    indexed = {p.page_number for p in _canonical_chunks(book.source).values()}
+    with fitz.open(stream=pdf, filetype="pdf") as doc:
+        return tuple(s for number in sorted(indexed) for s in page_slices(book, doc[number - 1]))
+
+
+def validate_slices(book, spans):
+    """Recheck all emitted quotations, including linked headers, cells and notes."""
+    pdf = pinned_bytes(book.source.pdf_path, book.source.document.pdf_sha256)
+    corpus = pinned_bytes(book.source.corpus_path, book.source.corpus_revision)
+    transcripts = json.loads(corpus)["pages"] if book.layout else []
+    page_text = {}
+    with fitz.open(stream=pdf, filetype="pdf") as doc:
+        for span in spans:
+            references = [span]
+            if span.table and "cells" in span.table:
+                references.extend(witnesses(span))
+            for ref in references:
+                if not 1 <= ref.page <= len(doc):
+                    raise ValueError("Search span outside source pages")
+                if ref.coordinates == "pdf_page_text":
+                    if ref.page not in page_text:
+                        page_text[ref.page] = doc[ref.page - 1].get_text()
+                    parent = page_text[ref.page]
+                elif ref.coordinates in {"ocr_transcript", "layout_transcript"}:
+                    parent = transcripts[ref.page - 1]["text"]
+                else:
+                    raise ValueError("Unknown search span coordinates")
+                if (
+                    not 0 <= ref.start < ref.end <= len(parent)
+                    or parent[ref.start : ref.end] != ref.text
+                ):
+                    raise ValueError("Search span differs from its source")
+
+
+@lru_cache(maxsize=8)
+def prepared_spans(book):
+    try:
+        payload = unpack(book.source, book.artifact)
+        spans = []
+        for record in payload["spans"]:
+            record["bbox"] = tuple(record["bbox"])
+            spans.append(Slice(book=book, **record))
+        validate_slices(book, spans)
+        if book.layout and tuple(s for s in spans if s.table and "cells" in s.table) != layout_rows(
+            book
+        ):
+            raise ValueError("Prepared rows differ from the pinned layout")
+        return tuple(spans)
+    except (KeyError, IndexError, TypeError, ValueError, RuntimeError) as exc:
+        raise SourceUnavailable("Invalid prepared search spans") from exc
+
+
 class LibrarySearch:
     def __init__(self, books, semantic):
         rows = []
@@ -183,13 +241,7 @@ class LibrarySearch:
         self.vocab = set()
         for book in books:
             source = book.source
-            pdf = pinned_bytes(source.pdf_path, source.document.pdf_sha256)
-            if book.layout:
-                passages = transcript_slices(book)
-            else:
-                indexed = {p.page_number for p in _canonical_chunks(source).values()}
-                with fitz.open(stream=pdf, filetype="pdf") as doc:
-                    passages = [s for page in sorted(indexed) for s in page_slices(book, doc[page-1])]
+            passages = prepared_spans(book) if book.artifact else extract_spans(book)
             for span in passages:
                 row = bool(span.table and "cells" in span.table)
                 key = f"{source.document.pdf_sha256}/{span.page}/{span.coordinates}/{span.start}/{int(row)}"
@@ -384,14 +436,17 @@ def cached_search(books, semantic):
     return LibrarySearch(books, semantic)
 
 
+_index_lock = Lock()
+
+
 def search(question, history, books, semantic):
     # A cached index remains usable only while both independently pinned artifacts still match.
     for book in books:
-        for path, pin in ((book.source.pdf_path, book.source.document.pdf_sha256),
-                          (book.source.corpus_path, book.source.corpus_revision)):
-            pinned_bytes(path, pin)
+        book.check_files()
     try:
-        engine = cached_search(books, semantic)
+        # lru_cache alone can construct the same cold index concurrently.
+        with _index_lock:
+            engine = cached_search(books, semantic)
         results, covered, total = engine.find(question, history)
         return results, engine.mode, covered, total
     except (ValueError, IndexError, RuntimeError) as exc:

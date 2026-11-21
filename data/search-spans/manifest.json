@@ -1,0 +1,19 @@
+{
+  "format": "campus-help-search-spans-v1",
+  "documents": [
+    {
+      "document": "STUDENTS-DISCIPLINE-AND-CONDUCT-RULES_compressed.pdf",
+      "pdf_sha256": "1325facb0517e640ebf634e8d30ffe3d2fcd1122a676e7cfba49db9a8fa3bb2d",
+      "corpus_sha256": "5108a91f99e3d49c0f4d5b7d5a8ad5761f58b5fb9ee92357013c01d892c6b5e1",
+      "file": "505f6cb082f53c5672a24dc046b5dfd3e267320c7cd024fb5b02a43d7dca2183.json.gz",
+      "sha256": "505f6cb082f53c5672a24dc046b5dfd3e267320c7cd024fb5b02a43d7dca2183"
+    },
+    {
+      "document": "scholarship_policy_25-26.pdf",
+      "pdf_sha256": "a7167e08cd510b0b86da7041ddb716b44ee98ba26077cdba7c075420f2d6d7ff",
+      "corpus_sha256": "ea39d4833bef7fface14416585e99a81747441ecdfc0e661c7a339104e09eda5",
+      "file": "f7f37b5f8f0fcf4fe1b0df4b64e646adbe977eb50fdfc51c266ff6b5229cedbf.json.gz",
+      "sha256": "f7f37b5f8f0fcf4fe1b0df4b64e646adbe977eb50fdfc51c266ff6b5229cedbf"
+    }
+  ]
+}
